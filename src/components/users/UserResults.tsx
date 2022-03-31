@@ -1,27 +1,33 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { IUserGitHub } from '../../types/types'
+import { useEffect, useContext } from 'react'
+// import axios from 'axios'
+// import { IUserGitHub } from '../../types/types'
 import Spinner from '../layout/Spinner'
 import UserItem from './UserItem'
+import GithubContext from '../../context/GithubContext'
 
 const UserResults = (): JSX.Element => {
-	const [users, setUsers] = useState<IUserGitHub[]>([])
-	const [loading, setloading] = useState<boolean>(true)
+	// const [users, setUsers] = useState<IUserGitHub[]>([])
+	// const [loading, setloading] = useState<boolean>(true)
 
-	const getchUsers = async (): Promise<void> => {
-		try {
-			const { data } = await axios.get<IUserGitHub[]>(`${process.env.REACT_APP_GITHUB_URL}/users`, {
-				headers: { Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}` },
-			})
-			setUsers(data)
-			setloading(false)
-		} catch (err) {
-			console.log(err)
-		}
-	}
+	// const fetchUsers = async (): Promise<void> => {
+	// 	try {
+	// 		const { data } = await axios.get<IUserGitHub[]>(`${process.env.REACT_APP_GITHUB_URL}/users`, {
+	// 			headers: { Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}` },
+	// 		})
+	// 		setUsers(data)
+	// 		setloading(false)
+	// 	} catch (err) {
+	// 		console.log(err)
+	// 	}
+	// }
+
+	const { users, loading, fetchUsers } = useContext(GithubContext)
 
 	useEffect(() => {
-		getchUsers()
+		if (fetchUsers) {
+			fetchUsers()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	if (!loading) {
