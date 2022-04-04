@@ -21,19 +21,20 @@ const UserResults = (): JSX.Element => {
 	// 	}
 	// }
 
-	const { users, loading, fetchUsers } = useContext(GithubContext)
+	// const { users, loading, fetchUsers } = useContext(GithubContext)
+	const { users, loading } = useContext(GithubContext)
 
 	useEffect(() => {
-		if (fetchUsers) {
-			fetchUsers()
-		}
+		// if (fetchUsers) {
+		// 	fetchUsers()
+		// }
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	if (!loading) {
 		return (
 			<div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
-				{users.map((user) => (
+				{users?.map((user) => (
 					<UserItem user={user} key={user.id} />
 				))}
 			</div>
