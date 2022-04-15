@@ -2,6 +2,7 @@ import { IUserGitHub } from '../types/types'
 
 export const GET_USERS = 'GET_USERS'
 export const SET_LOADING = 'SET_LOADING'
+export const CLEAR_USERS = 'CLEAR_USERS'
 
 interface UserState {
 	users?: IUserGitHub[]
@@ -24,6 +25,8 @@ const githubReducer = (state = initialState, action: githubAction): UserState =>
 			return { ...state, users: action.payload, loading: false }
 		case SET_LOADING:
 			return { ...state, loading: true }
+		case CLEAR_USERS:
+			return { ...state, users: [] }
 		default:
 			return state
 	}
