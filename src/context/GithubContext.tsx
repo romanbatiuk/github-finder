@@ -22,9 +22,6 @@ const GithubContext = createContext<IGithubContext>({ users: [], loading: true }
 export const GithubContextProvider = ({
 	children,
 }: PropsWithChildren<IGithubContext>): JSX.Element => {
-	// const [users, setUsers] = useState<IUserGitHub[]>([])
-	// const [loading, setloading] = useState<boolean>(true)
-
 	const initialState = {
 		users: [],
 		loading: false,
@@ -43,11 +40,6 @@ export const GithubContextProvider = ({
 			const { data } = await axios.get<GetUsersResponse>(`${GITHUB_URL}/search/users?${param}`, {
 				headers: { Authorization: `token ${GITHUB_TOKEN}` },
 			})
-
-			// setUsers(data)
-			// setloading(false)
-
-			// const { items } = data
 
 			dispatch({ type: GET_USERS, payload: data.items })
 		} catch (err) {
