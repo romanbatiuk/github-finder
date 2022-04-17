@@ -1,6 +1,10 @@
 export interface IUserGitHub {
 	id: number
 	login: string
+	name: string
+	bio: string
+	blog: string
+	hireable: boolean
 	avatar_url: string
 	html_url: string
 	public_repos: string
@@ -14,5 +18,6 @@ export interface IUserGitHub {
 
 export interface GithubState {
 	users: IUserGitHub[]
+	user: IUserGitHub
 	loading: boolean
 }
