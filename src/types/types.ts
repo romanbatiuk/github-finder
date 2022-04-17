@@ -11,8 +11,3 @@ export interface IUserGitHub {
 	location: string
 	twitter_username: string
 }
-
-export interface AlertState {
-	message: string
-	type: string
-}
