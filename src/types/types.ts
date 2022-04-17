@@ -16,8 +16,20 @@ export interface IUserGitHub {
 	twitter_username: string
 }
 
+export interface IUserGitHubRepo {
+	id: number
+	name: string
+	description: string
+	html_url: string
+	forks: number
+	open_issues: number
+	watchers_count: number
+	stargazers_count: number
+}
+
 export interface GithubState {
 	users: IUserGitHub[]
+	repos: IUserGitHubRepo[]
 	user: IUserGitHub
 	loading: boolean
 }

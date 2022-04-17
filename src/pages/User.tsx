@@ -3,15 +3,17 @@ import { FaUsers, FaUserFriends, FaCodepen, FaStore } from 'react-icons/fa'
 import { Link, useParams } from 'react-router-dom'
 import GithubContext from '../context/github/GithubContext'
 import Spinner from '../components/layout/Spinner'
+import RepoList from '../components/repos/RepoList'
 
 const User = (): JSX.Element => {
-	const { getUser, user, loading } = useContext(GithubContext)
+	const { getUser, user, loading, getUserRepos, repos } = useContext(GithubContext)
 
 	const { login } = useParams<{ login: string }>()
 
 	useEffect(() => {
 		if (login !== undefined) {
 			getUser(login)
+			getUserRepos(login)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -132,6 +134,8 @@ const User = (): JSX.Element => {
 						<div className="stat-value pr-5 text-3xl md:text-4xl">{user.public_gists}</div>
 					</div>
 				</div>
+
+				<RepoList repos={repos} />
 			</div>
 		</>
 	)
