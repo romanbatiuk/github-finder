@@ -4,12 +4,12 @@ import Navbar from './components/layout/Navbar'
 import About from './pages/About'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
-import { GithubContextProvider } from './context/GithubContext'
+import { GithubProvider } from './context/github/GithubContext'
 import { AlertProvider } from './context/alert/AlertContext'
 
 function App(): JSX.Element {
 	return (
-		<GithubContextProvider users={[]} loading>
+		<GithubProvider>
 			<AlertProvider>
 				<Router>
 					<div className="flex flex-col justify-between h-screen">
@@ -26,7 +26,7 @@ function App(): JSX.Element {
 					</div>
 				</Router>
 			</AlertProvider>
-		</GithubContextProvider>
+		</GithubProvider>
 	)
 }
 

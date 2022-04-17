@@ -11,3 +11,8 @@ export interface IUserGitHub {
 	location: string
 	twitter_username: string
 }
+
+export interface GithubState {
+	users: IUserGitHub[]
+	loading: boolean
+}

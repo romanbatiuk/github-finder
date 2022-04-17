@@ -1,5 +1,4 @@
-import React, { createContext } from 'react'
-import { useReducer } from 'react'
+import React, { createContext, useReducer } from 'react'
 import alertReducer, { SET_ALERT, REMOVE_ALERT } from './AlertReducer'
 
 export type IAlert = {
@@ -8,17 +7,13 @@ export type IAlert = {
 } | null
 
 export type AlertContextProps = {
-	alert: IAlert | null
+	alert: IAlert
 	setAlert: (msg: string, type: string) => void
 }
 
 const AlertContext = createContext<AlertContextProps>({} as AlertContextProps)
 
-interface props {
-	children: JSX.Element | JSX.Element[]
-}
-
-export const AlertProvider = ({ children }: props): JSX.Element => {
+export const AlertProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
 	const initialState: IAlert = null
 
 	const [state, dispatch] = useReducer(alertReducer, initialState)

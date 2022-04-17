@@ -1,28 +1,26 @@
 import axios from 'axios'
-import { createContext, useReducer, PropsWithChildren } from 'react'
-import { IUserGitHub } from '../types/types'
+import React, { createContext, useReducer } from 'react'
+import { GithubState, IUserGitHub } from '../../types/types'
 import githubReducer, { GET_USERS, SET_LOADING, CLEAR_USERS } from './GithubReducer'
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 
-export interface IGithubContext {
-	users: IUserGitHub[] | undefined
+export type GithubContextProps = {
+	users: IUserGitHub[]
 	loading: boolean
-	searchUsers?: (text: string) => void
-	clearUsers?: () => void
+	searchUsers: (text: string) => void
+	clearUsers: () => void
 }
 
 type GetUsersResponse = {
 	items: IUserGitHub[]
 }
 
-const GithubContext = createContext<IGithubContext>({ users: [], loading: true })
+const GithubContext = createContext<GithubContextProps>({} as GithubContextProps)
 
-export const GithubContextProvider = ({
-	children,
-}: PropsWithChildren<IGithubContext>): JSX.Element => {
-	const initialState = {
+export const GithubProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
+	const initialState: GithubState = {
 		users: [],
 		loading: false,
 	}
