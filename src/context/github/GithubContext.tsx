@@ -10,7 +10,6 @@ import githubReducer, {
 } from './GithubReducer'
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 
 export type GithubContextProps = {
 	users: IUserGitHub[]
@@ -47,9 +46,7 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }): JSX
 			// Set loading
 			dispatch({ type: SET_LOADING })
 
-			const { data } = await axios.get<GetUsersResponse>(`${GITHUB_URL}/search/users?${param}`, {
-				headers: { Authorization: `token ${GITHUB_TOKEN}` },
-			})
+			const { data } = await axios.get<GetUsersResponse>(`${GITHUB_URL}/search/users?${param}`)
 
 			dispatch({ type: GET_USERS, payload: data.items })
 		} catch (err) {
@@ -63,9 +60,7 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }): JSX
 			// Set loading
 			dispatch({ type: SET_LOADING })
 
-			const response = await axios.get(`${GITHUB_URL}/users/${login}`, {
-				headers: { Authorization: `token ${GITHUB_TOKEN}` },
-			})
+			const response = await axios.get(`${GITHUB_URL}/users/${login}`)
 
 			dispatch({ type: GET_SINGLE_USER, payload: response.data })
 		} catch (err) {
@@ -81,9 +76,7 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }): JSX
 			// Set loading
 			dispatch({ type: SET_LOADING })
 
-			const { data } = await axios.get(`${GITHUB_URL}/users/${login}/repos?${param}`, {
-				headers: { Authorization: `token ${GITHUB_TOKEN}` },
-			})
+			const { data } = await axios.get(`${GITHUB_URL}/users/${login}/repos?${param}`)
 
 			dispatch({ type: GET_REPOS, payload: data })
 		} catch (err) {
